@@ -16,11 +16,11 @@
     <form name="testData" id="SRdata">
         <div id="inputs">
         <label for="Season">Season</label>
-        <input type="text" name='Season' id="Season">
+        <input type="text" name='season' id="Season">
         <label for="Round">Round</label>
-        <input type="text" name='Round' id="Round">
+        <input type="text" name='round' id="Round">
 
-        <button type="submit" id="submitButton">Get Standings</button>
+        <button type="submit" id="submitButton" onClick="loadData()">Get Standings</button>
         <section class="list-group text-center f1-list mt-3">
             <!-- API content Here -->
         </section>

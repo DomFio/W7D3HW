@@ -2,20 +2,19 @@ const form = document.querySelector('#SRdata')
 
 form.addEventListener('submit', (event) =>{
     event.preventDefault();
-    let season = document.querySelector('#Season')
-    let round = document.querySelector('#Round')
-
-    console.log(season.value)
-    console.log(round.value)
-})
-
+    let season = document.querySelector('#Season').value
+    let round = document.querySelector('#Round').value
+    loadData(season,round)
+    console.log(season)
+    console.log(round)
+})   
 
 const getData = async (season, round) => {
     let response = await axios.get(`https://ergast.com/api/f1/${season}/${round}/driverStandings.json`)
     console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings)
     return response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings  
 }
-console.log(getData(season.value,round.value))
+// console.log(getData(season.value,round.value))
 
 // Create a constant to hold DOM Elements
 const DOM_Elements = { 
@@ -44,11 +43,11 @@ const createF1 = (position, names, nationality, sponsor, points) => {
 }
 
 //Create a function to loop over f1 and create each element
-const loadData = async () => {
+const loadData = async (season,round) => {
     clearData()
-    const f1List = await getData(season.value, round.value);
+    const f1List = await getData(season, round);
 
-    f1List.forEach( f1 => createF1(f1.position, f1.Driver.givenName, f1.Driver.nationality, f1.Constructors[0].name, f1.points))
+    f1List.forEach( f1car => createF1(f1car.position, f1car.Driver.givenName, f1car.Driver.nationality, f1car.Constructors[0].name, f1car.points))
 }
 
 const clearData = () =>{
@@ -86,7 +85,7 @@ const clearData = () =>{
 
 // //Create f1 list HTML
 // const createF1 = (position, names, nationality, sponsor, points) => {
-//     const html = `<table class="table id="table">
+//     const html = `<table class="table">
 //     <thread>
 //         <th scope="col">Position</th>
 //         <th scope="col">Name</th>
